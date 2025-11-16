@@ -20,11 +20,15 @@
 
 #include "../canvas/canvas.h"
 #include "../command/commandhistory.h"
+#include "../common/constants.h"
 #include "../common/renderitems.h"
 #include "../components/actionbar.h"
 #include "../components/propertybar.h"
 #include "../components/toolbar.h"
+#include "../data-structures/cachegrid.h"
+#include "../data-structures/quadtree.h"
 #include "../event/event.h"
+#include "coordinatetransformer.h"
 #include "../keybindings/actionmanager.h"
 #include "../keybindings/keybindmanager.h"
 #include "../properties/widgets/propertymanager.h"
@@ -142,6 +146,30 @@ void UIContext::setUIContext() {
             canvas.setBg(Common::lightBackgroundColor);
             button.setToolTip("Dark Mode");
             button.setIcon(iconManager().icon(IconManager::ACTION_DARK_MODE));
+        }
+
+        // Switch colors of all drawn items (black <-> white)
+        QVector<std::shared_ptr<Item>> allItems{
+            m_applicationContext->spatialContext().quadtree().getAllItems()};
+        CacheGrid &cacheGrid{m_applicationContext->spatialContext().cacheGrid()};
+        CoordinateTransformer &transformer{
+            m_applicationContext->spatialContext().coordinateTransformer()};
+
+        for (auto &item : allItems) {
+            try {
+                const Property &strokeProp{item->property(Property::StrokeColor)};
+                QColor currentColor{strokeProp.value<QColor>()};
+
+                if (Common::isBlackOrWhite(currentColor)) {
+                    QColor newColor{Common::invertBlackWhite(currentColor)};
+                    item->setProperty(Property::StrokeColor, Property{newColor, Property::StrokeColor});
+
+                    QRect gridDirtyRegion{transformer.worldToGrid(item->boundingBox()).toRect()};
+                    cacheGrid.markDirty(gridDirtyRegion);
+                }
+            } catch (const std::logic_error &) {
+                // Item doesn't have StrokeColor property, skip it
+            }
         }
 
         m_applicationContext->renderingContext().markForRender();

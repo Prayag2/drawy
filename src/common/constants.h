@@ -59,6 +59,27 @@ constexpr int doubleClickInterval{300};  // milliseconds
 
 constexpr qreal tabStopDistance{4};
 
+// Helper functions for color management
+inline bool isBlackOrWhite(const QColor &color) {
+    // Check if color is near black or near white (within tolerance of 5)
+    // This handles Qt's color conversions that may not produce exact values
+    int r = color.red(), g = color.green(), b = color.blue();
+    bool isNearBlack = (r <= 5 && g <= 5 && b <= 5);
+    bool isNearWhite = (r >= 250 && g >= 250 && b >= 250);
+    return isNearBlack || isNearWhite;
+}
+
+inline QColor invertBlackWhite(const QColor &color) {
+    // Invert near-black to white and near-white to black, preserving alpha
+    int r = color.red(), g = color.green(), b = color.blue();
+    if (r <= 5 && g <= 5 && b <= 5) {
+        return QColor(255, 255, 255, color.alpha());
+    } else if (r >= 250 && g >= 250 && b >= 250) {
+        return QColor(0, 0, 0, color.alpha());
+    }
+    return color;
+}
+
 };  // namespace Common
 
 #endif  // CONSTANTS_H
