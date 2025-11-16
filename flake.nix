@@ -23,20 +23,6 @@
     }@inputs:
     let
       forEachSystem = nixpkgs.lib.genAttrs (import systems);
-
-      # using a subset of qt6 is more economic than its entirety
-      getQt6Env =
-        pkgs:
-        with pkgs.qt6;
-        env "qt-custom-${qtbase.version}" [
-          # core
-          qtdeclarative
-          qtbase
-          qttools
-
-          # dependencies
-          pkgs.libglvnd # qtdeclarative
-        ];
     in
     {
       devShells = forEachSystem (system: {
@@ -50,9 +36,9 @@
               enabledPackages
               ++ (with pkgs; [
                 # Qt
-                (getQt6Env pkgs)
-                qtcreator
+                qt6.qttools
                 qt6.qtbase
+                qtcreator
 
                 cmake
                 bear
@@ -100,7 +86,7 @@
         in
         {
           default = pkgs.qt6Packages.callPackage ./package.nix {
-            qtEnv = getQt6Env pkgs;
+            src = ./.;
           };
         }
       );

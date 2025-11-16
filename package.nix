@@ -1,11 +1,11 @@
 {
   stdenv,
   lib,
+  src,
   fetchFromGitHub,
   makeDesktopItem,
   cmake,
   wrapQtAppsHook,
-  qtEnv,
   qt6,
 }:
 
@@ -13,12 +13,7 @@ stdenv.mkDerivation rec {
   pname = "drawy";
   version = "1.0.0";
 
-  src = fetchFromGitHub {
-    owner = "Prayag2";
-    repo = pname;
-    rev = "1.0.0-alpha";
-    sha256 = "sha256-5hv6iBTXTXwsmtjzRA+dAIzx/5jtWcOEfORMK0l1DSk=";
-  };
+  inherit src;
 
   nativeBuildInputs = [
     cmake
@@ -36,8 +31,8 @@ stdenv.mkDerivation rec {
   };
 
   buildInputs = [
-    qtEnv
     qt6.qtbase
+    qt6.qttools
   ];
 
   installPhase = ''
@@ -62,7 +57,7 @@ stdenv.mkDerivation rec {
     description = "Your handy, infinite, brainstorming tool";
     maintainers = with maintainers; [ quarterstar ];
     homepage = "https://github.com/Prayag2/drawy";
-    license = licenses.gpl3;
+    license = licenses.gpl3Only;
     platforms = platforms.linux;
   };
 }
