@@ -47,6 +47,9 @@ Future releases will allow you to change the keyboard shortcuts. For now they ar
 | <kbd>Ctrl+S</kbd>   | Save                   |
 | <kbd>Ctrl+O</kbd>   | Open File              |
 
+# Contributing
+Contributions are welcome. Please read the [contributing guide](CONTRIBUTING.md) before opening pull requests.
+
 # License
 This project uses the GNU General Public License V3.
 

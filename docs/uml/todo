@@ -1,5 +1,0 @@
-* Refactor application context
-* Refactor selection tool
-* Create a Renderer class:
-    * Move rendering timer logic to this class
-    * Move Common::renderItems to this class and create methods for separation of concerns
