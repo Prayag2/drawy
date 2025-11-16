@@ -41,6 +41,7 @@ Future releases will allow you to change the keyboard shortcuts. For now they ar
 | <kbd>L</kbd>        | Line Tool              |
 | <kbd>A</kbd>        | Arrow Tool             |
 | <kbd>M</kbd>        | Move Tool              |
+| <kbd>T</kbd>        | Text Tool              |
 | <kbd>Ctrl+A</kbd>   | Select All             |
 | <kbd>Delete</kbd>   | Delete                 |
 | <kbd>Ctrl+S</kbd>   | Save                   |

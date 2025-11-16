@@ -88,6 +88,11 @@ ActionManager::ActionManager(ApplicationContext *context) : m_context{context}, 
                                       [&]() { this->switchToLineTool(); },
                                       context}};
 
+    Action *textToolAction{new Action{"Text Tool",
+                                      "Switch to the text tool",
+                                      [&]() { this->switchToTextTool(); },
+                                      context}};
+
     Action *arrowToolAction{new Action{"Arrow Tool",
                                        "Switch to arrow drawing tool",
                                        [&]() { this->switchToArrowTool(); },
@@ -154,8 +159,7 @@ ActionManager::ActionManager(ApplicationContext *context) : m_context{context}, 
     keybindManager.addKeybinding(redoAction, "Ctrl+Shift+Z");
     keybindManager.addKeybinding(zoomInAction, "Ctrl++");
     keybindManager.addKeybinding(zoomOutAction, "Ctrl+-");
-    keybindManager.addKeybinding(increaseThicknessAction, "]");
-    keybindManager.addKeybinding(decreaseThicknessAction, "[");
+    keybindManager.addKeybinding(textToolAction, "T");
     keybindManager.addKeybinding(freeformToolAction, "P");
     keybindManager.addKeybinding(freeformToolAction, "B");
     keybindManager.addKeybinding(eraserToolAction, "E");
@@ -221,6 +225,10 @@ void ActionManager::switchToMoveTool() {
 
 void ActionManager::switchToSelectionTool() {
     m_context->uiContext().toolBar().changeTool(Tool::Selection);
+}
+
+void ActionManager::switchToTextTool() {
+    m_context->uiContext().toolBar().changeTool(Tool::Text);
 }
 
 void ActionManager::increaseThickness() {

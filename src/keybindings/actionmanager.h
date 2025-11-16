@@ -41,6 +41,7 @@ public:
     void switchToLineTool();
     void switchToArrowTool();
     void switchToMoveTool();
+    void switchToTextTool();
 
 private:
     ApplicationContext *m_context;
