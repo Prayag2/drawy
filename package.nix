@@ -15,6 +15,8 @@ stdenv.mkDerivation rec {
 
   inherit src;
 
+  strictDeps = true;
+
   nativeBuildInputs = [
     cmake
     wrapQtAppsHook
