@@ -60,6 +60,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Your handy, infinite, brainstorming tool";
+    maintainers = with maintainers; [ quarterstar ];
     homepage = "https://github.com/Prayag2/drawy";
     license = licenses.gpl3;
     platforms = platforms.linux;
