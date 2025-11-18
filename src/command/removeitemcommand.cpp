@@ -31,10 +31,6 @@ RemoveItemCommand::RemoveItemCommand(QVector<std::shared_ptr<Item>> items) : Ite
 }
 
 RemoveItemCommand::~RemoveItemCommand() {
-    auto &quadtree{ApplicationContext::instance()->spatialContext().quadtree()};
-    for (const auto item : m_items) {
-        quadtree.deleteItem(item);
-    }
 }
 
 void RemoveItemCommand::execute(ApplicationContext *context) {
