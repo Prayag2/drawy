@@ -22,8 +22,10 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QStandardPaths>
+#include <format>
 #include <memory>
 
+#include "../configuration.hpp"
 #include "../context/applicationcontext.hpp"
 #include "../context/renderingcontext.hpp"
 #include "../context/spatialcontext.hpp"
@@ -32,6 +34,7 @@
 #include "../item/item.hpp"
 #include "../item/polygon.hpp"
 #include "../item/text.hpp"
+#include "../utils/compression.hpp"
 
 Serializer::Serializer() {
 }
@@ -119,14 +122,25 @@ void Serializer::saveToFile() {
     qDebug() << "Saving...";
 
     QDir homeDir{QDir::home()};
-    QString defaultFilePath = homeDir.filePath("Untitled.json");
+
+    auto text = std::format("Untitled.{}", DRAWY_FILE_EXT);
+    QString defaultFilePath = homeDir.filePath(text.data());
+
+    text = std::format("Drawy (*.{})", DRAWY_FILE_EXT);
     QString fileName{
-        QFileDialog::getSaveFileName(nullptr, "Save File", defaultFilePath, "JSON (*.json)")};
+        QFileDialog::getSaveFileName(nullptr, "Save File", defaultFilePath, text.data())};
+
+    auto data{doc.toJson(QJsonDocument::Compact)};
+    auto compressedData{utils::compression::compressData(data)};
 
     QFile file{fileName};
     file.open(QIODevice::WriteOnly);
-    file.write(doc.toJson(QJsonDocument::Compact));
+    qint64 written = file.write(compressedData);
     file.close();
+
+    if (written != compressedData.size()) {
+        qWarning() << "Warning: not all bytes were written";
+    }
 
     qDebug() << "Saved to file: " << fileName;
 }

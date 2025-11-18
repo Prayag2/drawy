@@ -24,8 +24,10 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QString>
+#include <format>
 #include <memory>
 
+#include "../configuration.hpp"
 #include "../context/applicationcontext.hpp"
 #include "../context/renderingcontext.hpp"
 #include "../context/spatialcontext.hpp"
@@ -38,51 +40,71 @@
 #include "../item/line.hpp"
 #include "../item/rectangle.hpp"
 #include "../item/text.hpp"
+#include "../utils/compression.hpp"
 
 void Loader::loadFromFile(ApplicationContext *context) {
-    QDir homeDir{QDir::home()};
-    QString fileName{
-        QFileDialog::getOpenFileName(nullptr, "Open File", homeDir.path(), "JSON (*.json)")};
-    QFile file{fileName};
+    // file filter
+    QString filter = QString::fromUtf8("Drawy (*.%1)").arg(DRAWY_FILE_EXT);
 
+    // ask for file (handle cancel)
+    QDir homeDir{QDir::home()};
+    QString fileName = QFileDialog::getOpenFileName(nullptr, "Open File", homeDir.path(), filter);
+    if (fileName.isEmpty())
+        return;
+
+    QFile file{fileName};
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << "Failed to open file:" << file.errorString();
         return;
     }
 
+    QByteArray compressedByteArray = file.readAll();
+    file.close();
+
     QByteArray byteArray;
-    QByteArray line;
-    QTextStream in(&file);
+    try {
+        byteArray = utils::compression::decompressData(compressedByteArray);
+    } catch (const std::exception &ex) {
+        qWarning() << "Decompression failed:" << ex.what();
 
-    while (!in.atEnd()) {
-        line = in.readLine().toUtf8();
-        byteArray.append(line);
-        byteArray.append('\n');
-    }
-
-    QJsonDocument doc = QJsonDocument::fromJson(byteArray);
-    if (!doc.isNull() && doc.isObject()) {
-        QJsonObject docObj = doc.object();
-
-        context->reset();
-        QuadTree &quadtree{context->spatialContext().quadtree()};
-
-        QJsonArray itemsArray = array(value(docObj, "items"));
-        for (const QJsonValue &value : itemsArray) {
-            QJsonObject itemObj = object(value);
-
-            std::shared_ptr<Item> item = createItem(itemObj);
-            quadtree.insertItem(item);
+        QByteArray decoded = QByteArray::fromBase64(compressedByteArray);
+        if (!decoded.isEmpty() && decoded.size() < compressedByteArray.size()) {
+            try {
+                byteArray = utils::compression::decompressData(decoded);
+            } catch (const std::exception &ex2) {
+                qWarning() << "Base64-decode fallback also failed:" << ex2.what();
+                return;
+            }
+        } else {
+            return;
         }
-
-        qreal zoomFactor = value(docObj, "zoom_factor").toDouble();
-        context->renderingContext().setZoomFactor(zoomFactor);
-
-        QPointF offsetPos = toPointF(value(docObj, "offset_pos"));
-        context->spatialContext().setOffsetPos(offsetPos);
-    } else {
-        qWarning() << "JSON document is not an object or is invalid";
     }
+
+    QJsonParseError parseError;
+    QJsonDocument doc = QJsonDocument::fromJson(byteArray, &parseError);
+    if (doc.isNull() || !doc.isObject()) {
+        qWarning() << "JSON parse failed:" << parseError.errorString()
+                   << "offset:" << parseError.offset;
+        return;
+    }
+
+    QJsonObject docObj = doc.object();
+
+    context->reset();
+    QuadTree &quadtree{context->spatialContext().quadtree()};
+
+    QJsonArray itemsArray = array(value(docObj, "items"));
+    for (const QJsonValue &v : itemsArray) {
+        QJsonObject itemObj = object(v);
+        std::shared_ptr<Item> item = createItem(itemObj);
+        quadtree.insertItem(item);
+    }
+
+    qreal zoomFactor = value(docObj, "zoom_factor").toDouble();
+    context->renderingContext().setZoomFactor(zoomFactor);
+
+    QPointF offsetPos = toPointF(value(docObj, "offset_pos"));
+    context->spatialContext().setOffsetPos(offsetPos);
 
     context->spatialContext().cacheGrid().markAllDirty();
     context->renderingContext().markForRender();

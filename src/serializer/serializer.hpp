@@ -20,6 +20,7 @@
 
 #include <QJsonArray>
 #include <QJsonObject>
+
 class Item;
 class Property;
 class ApplicationContext;
