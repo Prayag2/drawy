@@ -29,12 +29,12 @@ Drawy is a work-in-progress infinite whiteboard tool written in Qt/C++, which ai
 Future releases will allow you to change the keyboard shortcuts. For now they are hardcoded. Here's a list of all available keyboard shortcuts:
 | Key Combination                                                             | Description       |
 |:---------------------------------------------------------------------------:|:-----------------:|
-| <kbd>Ctrl</kdb>+<kdb>Z</kbd>                                                | Undo              |
-| <kbd>Ctrl</kdb>+<kdb>Y</kbd>, <kbd>Ctrl</kdb>+<kdb>Shift</kdb>+<kdb>Z</kbd> | Redo              |
-| <kbd>Ctrl</kdb>+<kdb>+</kbd>                                                | Zoom In           |
-| <kbd>Ctrl</kdb>+<kdb>-</kbd>                                                | Zoom Out          |
-| <kbd>Ctrl</kdb>+<kdb>G</kbd>                                                | Group selection   |
-| <kbd>Ctrl</kdb>+<kbd>Shift</kbd>+<kdb>G</kbd>                               | Ungroup selection |
+| <kbd>Ctrl</kbd> + <kbd>Z</kbd>                                              | Undo              |
+| <kbd>Ctrl</kbd> + <kbd>Y</kbd>, <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> | Redo              |
+| <kbd>Ctrl</kbd> + <kbd>+</kbd>                                                | Zoom In           |
+| <kbd>Ctrl</kbd> + <kbd>-</kbd>                                                | Zoom Out          |
+| <kbd>Ctrl</kbd> + <kbd>G</kbd>                                                | Group selection   |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>G</kbd>                               | Ungroup selection |
 | <kbd>P</kbd>, <kbd>B</kbd>                                                  | Freeform Tool     |
 | <kbd>E</kbd>                                                                | Eraser Tool       |
 | <kbd>S</kbd>                                                                | Selection Tool    |
