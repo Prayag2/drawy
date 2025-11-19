@@ -27,6 +27,8 @@
 #include <format>
 #include <memory>
 
+#include "../common/constants.hpp"
+#include "../common/utils/compression.hpp"
 #include "../context/applicationcontext.hpp"
 #include "../context/renderingcontext.hpp"
 #include "../context/spatialcontext.hpp"
@@ -39,8 +41,6 @@
 #include "../item/line.hpp"
 #include "../item/rectangle.hpp"
 #include "../item/text.hpp"
-#include "../utils/compression.hpp"
-#include "../common/constants.hpp"
 
 void Loader::loadFromFile(ApplicationContext *context) {
     // file filter
@@ -63,14 +63,14 @@ void Loader::loadFromFile(ApplicationContext *context) {
 
     QByteArray byteArray;
     try {
-        byteArray = utils::compression::decompressData(compressedByteArray);
+        byteArray = Common::Utils::Compression::decompressData(compressedByteArray);
     } catch (const std::exception &ex) {
         qWarning() << "Decompression failed:" << ex.what();
 
         QByteArray decoded = QByteArray::fromBase64(compressedByteArray);
         if (!decoded.isEmpty() && decoded.size() < compressedByteArray.size()) {
             try {
-                byteArray = utils::compression::decompressData(decoded);
+                byteArray = Common::Utils::Compression::decompressData(decoded);
             } catch (const std::exception &ex2) {
                 qWarning() << "Base64-decode fallback also failed:" << ex2.what();
                 return;

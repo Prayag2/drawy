@@ -22,7 +22,7 @@
 #include <utility>
 
 #include "../common/constants.hpp"
-#include "../common/utils.hpp"
+#include "../common/utils/math.hpp"
 
 /*
  * TODO: The current implementation is not optimal. A single character insertion
@@ -61,7 +61,7 @@ bool TextItem::intersects(const QRectF &rect) {
 }
 
 bool TextItem::intersects(const QLineF &line) {
-    return Common::intersects(m_boundingBox, line);
+    return Common::Utils::Math::intersects(m_boundingBox, line);
 }
 
 void TextItem::draw(QPainter &painter, const QPointF &offset) {

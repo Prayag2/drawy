@@ -18,7 +18,7 @@
 
 #include "arrow.hpp"
 
-#include "../common/utils.hpp"
+#include "../common/utils/math.hpp"
 
 ArrowItem::ArrowItem() {
 }
@@ -66,24 +66,24 @@ bool ArrowItem::intersects(const QRectF &rect) {
     QPointF c{rect.x() + rect.width(), rect.y() + rect.height()};
     QPointF d{rect.x(), rect.y() + rect.height()};
 
-    return (Common::intersects(QLineF{p, q}, QLineF{a, b}) ||
-            Common::intersects(QLineF{p, q}, QLineF{b, c}) ||
-            Common::intersects(QLineF{p, q}, QLineF{c, d}) ||
-            Common::intersects(QLineF{p, q}, QLineF{d, a}) ||
-            Common::intersects(QLineF{q, r}, QLineF{a, b}) ||
-            Common::intersects(QLineF{q, r}, QLineF{b, c}) ||
-            Common::intersects(QLineF{q, r}, QLineF{c, d}) ||
-            Common::intersects(QLineF{q, r}, QLineF{d, a}) ||
-            Common::intersects(QLineF{q, s}, QLineF{a, b}) ||
-            Common::intersects(QLineF{q, s}, QLineF{b, c}) ||
-            Common::intersects(QLineF{q, s}, QLineF{c, d}) ||
-            Common::intersects(QLineF{q, s}, QLineF{d, a}));
+    return (Common::Utils::Math::intersects(QLineF{p, q}, QLineF{a, b}) ||
+            Common::Utils::Math::intersects(QLineF{p, q}, QLineF{b, c}) ||
+            Common::Utils::Math::intersects(QLineF{p, q}, QLineF{c, d}) ||
+            Common::Utils::Math::intersects(QLineF{p, q}, QLineF{d, a}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{a, b}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{b, c}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{c, d}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{d, a}) ||
+            Common::Utils::Math::intersects(QLineF{q, s}, QLineF{a, b}) ||
+            Common::Utils::Math::intersects(QLineF{q, s}, QLineF{b, c}) ||
+            Common::Utils::Math::intersects(QLineF{q, s}, QLineF{c, d}) ||
+            Common::Utils::Math::intersects(QLineF{q, s}, QLineF{d, a}));
 };
 
 bool ArrowItem::intersects(const QLineF &line) {
-    return (Common::intersects(QLineF{start(), end()}, line) ||
-            Common::intersects(QLineF{end(), m_arrowP1}, line) ||
-            Common::intersects(QLineF{end(), m_arrowP2}, line));
+    return (Common::Utils::Math::intersects(QLineF{start(), end()}, line) ||
+            Common::Utils::Math::intersects(QLineF{end(), m_arrowP1}, line) ||
+            Common::Utils::Math::intersects(QLineF{end(), m_arrowP2}, line));
 }
 
 void ArrowItem::translate(const QPointF &amount) {

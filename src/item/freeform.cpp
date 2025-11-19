@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "../common/constants.hpp"
-#include "../common/utils.hpp"
+#include "../common/utils/math.hpp"
 
 FreeformItem::FreeformItem() {
     m_properties[Property::StrokeWidth] = Property{1, Property::StrokeWidth};
@@ -78,8 +78,10 @@ bool FreeformItem::intersects(const QRectF &rect) {
     for (qsizetype idx{0}; idx < pointsSize - 1; idx++) {
         QLine l{m_points[idx].toPoint(), m_points[idx + 1].toPoint()};
 
-        if (Common::intersects(l, QLineF{p, q}) || Common::intersects(l, QLineF{q, r}) ||
-            Common::intersects(l, QLineF{r, s}) || Common::intersects(l, QLineF{s, q}) ||
+        if (Common::Utils::Math::intersects(l, QLineF{p, q}) ||
+            Common::Utils::Math::intersects(l, QLineF{q, r}) ||
+            Common::Utils::Math::intersects(l, QLineF{r, s}) ||
+            Common::Utils::Math::intersects(l, QLineF{s, q}) ||
             rect.contains(m_points[idx].toPoint()) || rect.contains(m_points[idx + 1].toPoint()))
             return true;
     }
@@ -90,7 +92,7 @@ bool FreeformItem::intersects(const QRectF &rect) {
 bool FreeformItem::intersects(const QLineF &line) {
     qsizetype pointSize{m_points.size()};
     for (qsizetype index{1}; index < pointSize; index++) {
-        if (Common::intersects(QLineF{m_points[index - 1], m_points[index]}, line)) {
+        if (Common::Utils::Math::intersects(QLineF{m_points[index - 1], m_points[index]}, line)) {
             return true;
         }
     }

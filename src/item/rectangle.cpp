@@ -20,7 +20,7 @@
 
 #include <QDebug>
 
-#include "../common/utils.hpp"
+#include "../common/utils/math.hpp"
 
 RectangleItem::RectangleItem() {
 }
@@ -44,27 +44,27 @@ bool RectangleItem::intersects(const QRectF &rect) {
     QPointF c{rect.bottomRight()};
     QPointF d{rect.bottomLeft()};
 
-    return (Common::intersects(QLineF{p, q}, QLineF{a, b}) ||
-            Common::intersects(QLineF{p, q}, QLineF{b, c}) ||
-            Common::intersects(QLineF{p, q}, QLineF{c, d}) ||
-            Common::intersects(QLineF{p, q}, QLineF{d, a}) ||
-            Common::intersects(QLineF{q, r}, QLineF{a, b}) ||
-            Common::intersects(QLineF{q, r}, QLineF{b, c}) ||
-            Common::intersects(QLineF{q, r}, QLineF{c, d}) ||
-            Common::intersects(QLineF{q, r}, QLineF{d, a}) ||
-            Common::intersects(QLineF{r, s}, QLineF{a, b}) ||
-            Common::intersects(QLineF{r, s}, QLineF{b, c}) ||
-            Common::intersects(QLineF{r, s}, QLineF{c, d}) ||
-            Common::intersects(QLineF{r, s}, QLineF{d, a}) ||
-            Common::intersects(QLineF{p, s}, QLineF{a, b}) ||
-            Common::intersects(QLineF{p, s}, QLineF{b, c}) ||
-            Common::intersects(QLineF{p, s}, QLineF{c, d}) ||
-            Common::intersects(QLineF{p, s}, QLineF{d, a}));
+    return (Common::Utils::Math::intersects(QLineF{p, q}, QLineF{a, b}) ||
+            Common::Utils::Math::intersects(QLineF{p, q}, QLineF{b, c}) ||
+            Common::Utils::Math::intersects(QLineF{p, q}, QLineF{c, d}) ||
+            Common::Utils::Math::intersects(QLineF{p, q}, QLineF{d, a}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{a, b}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{b, c}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{c, d}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{d, a}) ||
+            Common::Utils::Math::intersects(QLineF{r, s}, QLineF{a, b}) ||
+            Common::Utils::Math::intersects(QLineF{r, s}, QLineF{b, c}) ||
+            Common::Utils::Math::intersects(QLineF{r, s}, QLineF{c, d}) ||
+            Common::Utils::Math::intersects(QLineF{r, s}, QLineF{d, a}) ||
+            Common::Utils::Math::intersects(QLineF{p, s}, QLineF{a, b}) ||
+            Common::Utils::Math::intersects(QLineF{p, s}, QLineF{b, c}) ||
+            Common::Utils::Math::intersects(QLineF{p, s}, QLineF{c, d}) ||
+            Common::Utils::Math::intersects(QLineF{p, s}, QLineF{d, a}));
 };
 
 bool RectangleItem::intersects(const QLineF &line) {
     QRectF box{start(), end()};
-    return Common::intersects(box, line);
+    return Common::Utils::Math::intersects(box, line);
 }
 
 Item::Type RectangleItem::type() const {

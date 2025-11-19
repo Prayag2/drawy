@@ -21,7 +21,7 @@
 #include <QLineF>
 #include <QRectF>
 
-namespace Common {
+namespace Common::Utils::Math {
 inline int orientation(QPointF a, QPointF b, QPointF c) {
     QPointF ab{b.x() - a.x(), b.y() - a.y()};
     QPointF ac{c.x() - a.x(), c.y() - a.y()};
@@ -54,4 +54,4 @@ inline bool intersects(const QRectF &rect, const QLineF &line) {
 inline bool intersects(const QRectF &rect, const QPointF &point) {
     return rect.contains(point);
 }
-};  // namespace Common
+};  // namespace Common::Utils::Math

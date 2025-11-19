@@ -16,9 +16,9 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../common/utils.h"
-#include "../item/item.h"
-#include "orderedlist.h"
+#include "../common/utils/math.hpp"
+#include "../item/item.hpp"
+#include "orderedlist.hpp"
 #include <cstdlib>
 #include <memory>
 #include <unordered_map>
@@ -52,12 +52,12 @@ void QuadTree::query(const Shape &shape,
                      QueryCondition condition,
                      QVector<std::shared_ptr<Item>> &out,
                      std::unordered_map<std::shared_ptr<Item>, bool> &itemAlreadyPushed) const {
-    if (!Common::intersects(m_boundingBox, shape)) {
+    if (!Common::Utils::Math::intersects(m_boundingBox, shape)) {
         return;
     }
 
     for (const std::shared_ptr<Item> &item : m_items) {
-        if (Common::intersects(item->boundingBox(), shape)) {
+        if (Common::Utils::Math::intersects(item->boundingBox(), shape)) {
             if (condition(item, shape)) {
                 // using the hash map because multiple nodes may have a pointer to the
                 // same item
