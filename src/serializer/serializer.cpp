@@ -25,7 +25,6 @@
 #include <format>
 #include <memory>
 
-#include "../configuration.hpp"
 #include "../context/applicationcontext.hpp"
 #include "../context/renderingcontext.hpp"
 #include "../context/spatialcontext.hpp"
@@ -35,6 +34,7 @@
 #include "../item/polygon.hpp"
 #include "../item/text.hpp"
 #include "../utils/compression.hpp"
+#include "../common/constants.hpp"
 
 Serializer::Serializer() {
 }
@@ -123,10 +123,10 @@ void Serializer::saveToFile() {
 
     QDir homeDir{QDir::home()};
 
-    auto text = std::format("Untitled.{}", DRAWY_FILE_EXT);
+    auto text = std::format("Untitled.{}", Common::drawyFileExt);
     QString defaultFilePath = homeDir.filePath(text.data());
 
-    text = std::format("Drawy (*.{})", DRAWY_FILE_EXT);
+    text = std::format("Drawy (*.{})", Common::drawyFileExt);
     QString fileName{
         QFileDialog::getSaveFileName(nullptr, "Save File", defaultFilePath, text.data())};
 

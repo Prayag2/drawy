@@ -27,7 +27,6 @@
 #include <format>
 #include <memory>
 
-#include "../configuration.hpp"
 #include "../context/applicationcontext.hpp"
 #include "../context/renderingcontext.hpp"
 #include "../context/spatialcontext.hpp"
@@ -41,10 +40,11 @@
 #include "../item/rectangle.hpp"
 #include "../item/text.hpp"
 #include "../utils/compression.hpp"
+#include "../common/constants.hpp"
 
 void Loader::loadFromFile(ApplicationContext *context) {
     // file filter
-    QString filter = QString::fromUtf8("Drawy (*.%1)").arg(DRAWY_FILE_EXT);
+    QString filter = QString::fromUtf8("Drawy (*.%1)").arg(Common::drawyFileExt);
 
     // ask for file (handle cancel)
     QDir homeDir{QDir::home()};
