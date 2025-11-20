@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<component type="desktop-application">
+  <id>io.github.prayag2.Drawy</id>
+  <name>Drawy</name>
+  <summary>Your handy, infinite, brainstorming tool</summary>
+  <developer id="com.github.prayag2">
+    <name>Prayag Jain</name>
+  </developer>
+  <metadata_license>CC-BY-4.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <description>
+    <p>Drawy is a work-in-progress infinite whiteboard tool, which aims to be a native desktop alternative to the amazing web-based Excalidraw.</p>
+  </description>
+  <url type="homepage">https://github.com/Prayag2/drawy</url>
+  <url type="bugtracker">https://github.com/Prayag2/drawy/issues</url>
+  <url type="faq">https://github.com/Prayag2/drawy/discussions</url>
+  <url type="help">https://github.com/Prayag2/drawy/discussions</url>
+  <url type="vcs-browser">https://github.com/Prayag2/drawy</url>
+  <url type="contribute">https://github.com/Prayag2/drawy</url>
+  <categories>
+    <category>Qt</category>
+    <category>Graphics</category>
+  </categories>
+  <recommends>
+    <control>pointing</control>
+  </recommends>
+  <content_rating type="oars-1.1"/>
+  <launchable type="desktop-id">io.github.prayag2.Drawy.desktop</launchable>
+  <branding>
+    <color type="primary" scheme_preference="light">#27a9ff</color>
+    <color type="primary" scheme_preference="dark">#002d6c</color>
+  </branding>
+</component>

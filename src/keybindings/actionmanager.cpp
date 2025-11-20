@@ -1,44 +1,42 @@
 /*
-* Drawy - A simple brainstorming tool with an infinite canvas
-* Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Drawy - A simple brainstorming tool with an infinite canvas
+ * Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#include "actionmanager.h"
-#include <qkeysequence.h>
-
-#include "../command/selectcommand.h"
-#include "../command/deselectcommand.h"
-#include "../command/commandhistory.h"
-#include "../command/groupcommand.h"
-#include "../command/ungroupcommand.h"
-#include "../command/removeitemcommand.h"
-#include "../components/propertybar.h"
-#include "../components/toolbar.h"
-#include "../context/applicationcontext.h"
-#include "../context/coordinatetransformer.h"
-#include "../context/renderingcontext.h"
-#include "../context/selectioncontext.h"
-#include "../context/spatialcontext.h"
-#include "../context/uicontext.h"
-#include "../data-structures/cachegrid.h"
-#include "../data-structures/quadtree.h"
-#include "../serializer/loader.h"
-#include "../serializer/serializer.h"
-#include "action.h"
-#include "keybindmanager.h"
+#include "actionmanager.hpp"
+#include "../command/selectcommand.hpp"
+#include "../command/deselectcommand.hpp"
+#include "../command/groupcommand.hpp"
+#include "../command/ungroupcommand.hpp"
+#include "../command/commandhistory.hpp"
+#include "../command/removeitemcommand.hpp"
+#include "../components/propertybar.hpp"
+#include "../components/toolbar.hpp"
+#include "../context/applicationcontext.hpp"
+#include "../context/coordinatetransformer.hpp"
+#include "../context/renderingcontext.hpp"
+#include "../context/selectioncontext.hpp"
+#include "../context/spatialcontext.hpp"
+#include "../context/uicontext.hpp"
+#include "../data-structures/cachegrid.hpp"
+#include "../data-structures/quadtree.hpp"
+#include "../serializer/loader.hpp"
+#include "../serializer/serializer.hpp"
+#include "action.hpp"
+#include "keybindmanager.hpp"
 #include <memory>
 
 ActionManager::ActionManager(ApplicationContext *context) : m_context{context}, QObject(context) {
@@ -273,7 +271,7 @@ void ActionManager::selectAll() {
 
 void ActionManager::saveToFile() {
     Serializer serializer{};
-    
+
     serializer.serialize(m_context);
     serializer.saveToFile();
 }

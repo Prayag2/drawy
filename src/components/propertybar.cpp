@@ -1,33 +1,34 @@
 /*
-* Drawy - A simple brainstorming tool with an infinite canvas
-* Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Drawy - A simple brainstorming tool with an infinite canvas
+ * Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#include "propertybar.h"
+#include "propertybar.hpp"
 
-#include "../context/applicationcontext.h"
-#include "../context/uicontext.h"
-#include "../properties/widgets/propertymanager.h"
-#include "../properties/widgets/propertywidget.h"
-#include "../tools/tool.h"
-#include "toolbar.h"
 #include <QLabel>
 #include <QSpacerItem>
 #include <QVBoxLayout>
 #include <stdexcept>
+
+#include "../context/applicationcontext.hpp"
+#include "../context/uicontext.hpp"
+#include "../properties/widgets/propertymanager.hpp"
+#include "../properties/widgets/propertywidget.hpp"
+#include "../tools/tool.hpp"
+#include "toolbar.hpp"
 
 PropertyBar::PropertyBar(QWidget *parent) : QFrame{parent} {
     this->setFrameStyle(QFrame::StyledPanel | QFrame::Plain);

@@ -1,27 +1,28 @@
 /*
-* Drawy - A simple brainstorming tool with an infinite canvas
-* Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Drawy - A simple brainstorming tool with an infinite canvas
+ * Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#include "freeform.h"
+#include "freeform.hpp"
 
-#include "../common/constants.h"
-#include "../common/utils.h"
 #include <QDateTime>
 #include <memory>
+
+#include "../common/constants.hpp"
+#include "../common/utils/math.hpp"
 
 FreeformItem::FreeformItem() {
     m_properties[Property::StrokeWidth] = Property{1, Property::StrokeWidth};
@@ -77,8 +78,10 @@ bool FreeformItem::intersects(const QRectF &rect) {
     for (qsizetype idx{0}; idx < pointsSize - 1; idx++) {
         QLine l{m_points[idx].toPoint(), m_points[idx + 1].toPoint()};
 
-        if (Common::intersects(l, QLineF{p, q}) || Common::intersects(l, QLineF{q, r}) ||
-            Common::intersects(l, QLineF{r, s}) || Common::intersects(l, QLineF{s, q}) ||
+        if (Common::Utils::Math::intersects(l, QLineF{p, q}) ||
+            Common::Utils::Math::intersects(l, QLineF{q, r}) ||
+            Common::Utils::Math::intersects(l, QLineF{r, s}) ||
+            Common::Utils::Math::intersects(l, QLineF{s, q}) ||
             rect.contains(m_points[idx].toPoint()) || rect.contains(m_points[idx + 1].toPoint()))
             return true;
     }
@@ -89,7 +92,7 @@ bool FreeformItem::intersects(const QRectF &rect) {
 bool FreeformItem::intersects(const QLineF &line) {
     qsizetype pointSize{m_points.size()};
     for (qsizetype index{1}; index < pointSize; index++) {
-        if (Common::intersects(QLineF{m_points[index - 1], m_points[index]}, line)) {
+        if (Common::Utils::Math::intersects(QLineF{m_points[index - 1], m_points[index]}, line)) {
             return true;
         }
     }

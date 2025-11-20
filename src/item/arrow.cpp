@@ -1,24 +1,24 @@
 /*
-* Drawy - A simple brainstorming tool with an infinite canvas
-* Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Drawy - A simple brainstorming tool with an infinite canvas
+ * Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#include "arrow.h"
+#include "arrow.hpp"
 
-#include "../common/utils.h"
+#include "../common/utils/math.hpp"
 
 ArrowItem::ArrowItem() {
 }
@@ -66,24 +66,24 @@ bool ArrowItem::intersects(const QRectF &rect) {
     QPointF c{rect.x() + rect.width(), rect.y() + rect.height()};
     QPointF d{rect.x(), rect.y() + rect.height()};
 
-    return (Common::intersects(QLineF{p, q}, QLineF{a, b}) ||
-            Common::intersects(QLineF{p, q}, QLineF{b, c}) ||
-            Common::intersects(QLineF{p, q}, QLineF{c, d}) ||
-            Common::intersects(QLineF{p, q}, QLineF{d, a}) ||
-            Common::intersects(QLineF{q, r}, QLineF{a, b}) ||
-            Common::intersects(QLineF{q, r}, QLineF{b, c}) ||
-            Common::intersects(QLineF{q, r}, QLineF{c, d}) ||
-            Common::intersects(QLineF{q, r}, QLineF{d, a}) ||
-            Common::intersects(QLineF{q, s}, QLineF{a, b}) ||
-            Common::intersects(QLineF{q, s}, QLineF{b, c}) ||
-            Common::intersects(QLineF{q, s}, QLineF{c, d}) ||
-            Common::intersects(QLineF{q, s}, QLineF{d, a}));
+    return (Common::Utils::Math::intersects(QLineF{p, q}, QLineF{a, b}) ||
+            Common::Utils::Math::intersects(QLineF{p, q}, QLineF{b, c}) ||
+            Common::Utils::Math::intersects(QLineF{p, q}, QLineF{c, d}) ||
+            Common::Utils::Math::intersects(QLineF{p, q}, QLineF{d, a}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{a, b}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{b, c}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{c, d}) ||
+            Common::Utils::Math::intersects(QLineF{q, r}, QLineF{d, a}) ||
+            Common::Utils::Math::intersects(QLineF{q, s}, QLineF{a, b}) ||
+            Common::Utils::Math::intersects(QLineF{q, s}, QLineF{b, c}) ||
+            Common::Utils::Math::intersects(QLineF{q, s}, QLineF{c, d}) ||
+            Common::Utils::Math::intersects(QLineF{q, s}, QLineF{d, a}));
 };
 
 bool ArrowItem::intersects(const QLineF &line) {
-    return (Common::intersects(QLineF{start(), end()}, line) ||
-            Common::intersects(QLineF{end(), m_arrowP1}, line) ||
-            Common::intersects(QLineF{end(), m_arrowP2}, line));
+    return (Common::Utils::Math::intersects(QLineF{start(), end()}, line) ||
+            Common::Utils::Math::intersects(QLineF{end(), m_arrowP1}, line) ||
+            Common::Utils::Math::intersects(QLineF{end(), m_arrowP2}, line));
 }
 
 void ArrowItem::translate(const QPointF &amount) {

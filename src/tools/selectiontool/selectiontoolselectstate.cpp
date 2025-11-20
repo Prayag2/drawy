@@ -1,39 +1,37 @@
 /*
-* Drawy - A simple brainstorming tool with an infinite canvas
-* Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Drawy - A simple brainstorming tool with an infinite canvas
+ * Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#include "selectiontoolselectstate.h"
-#include <qnamespace.h>
-
-#include "../../command/selectcommand.h"
-#include "../../command/deselectcommand.h"
-#include "../../command/commandhistory.h"
-#include "../../canvas/canvas.h"
-#include "../../components/propertybar.h"
-#include "../../context/applicationcontext.h"
-#include "../../context/coordinatetransformer.h"
-#include "../../context/renderingcontext.h"
-#include "../../context/selectioncontext.h"
-#include "../../context/spatialcontext.h"
-#include "../../context/uicontext.h"
-#include "../../data-structures/cachegrid.h"
-#include "../../data-structures/quadtree.h"
-#include "../../event/event.h"
-#include "../../item/item.h"
+#include "selectiontoolselectstate.hpp"
+#include "../../command/selectcommand.hpp"
+#include "../../command/deselectcommand.hpp"
+#include "../../command/commandhistory.hpp"
+#include "../../canvas/canvas.hpp"
+#include "../../components/propertybar.hpp"
+#include "../../context/applicationcontext.hpp"
+#include "../../context/coordinatetransformer.hpp"
+#include "../../context/renderingcontext.hpp"
+#include "../../context/selectioncontext.hpp"
+#include "../../context/spatialcontext.hpp"
+#include "../../context/uicontext.hpp"
+#include "../../data-structures/cachegrid.hpp"
+#include "../../data-structures/quadtree.hpp"
+#include "../../event/event.hpp"
+#include "../../item/item.hpp"
 
 bool SelectionToolSelectState::mousePressed(ApplicationContext *context) {
     auto &uiContext{context->uiContext()};

@@ -1,35 +1,36 @@
 /*
-* Drawy - A simple brainstorming tool with an infinite canvas
-* Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Drawy - A simple brainstorming tool with an infinite canvas
+ * Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#include "controller.h"
+#include "controller.hpp"
 
-#include "../canvas/canvas.h"
-#include "../common/constants.h"
-#include "../common/renderitems.h"
-#include "../components/toolbar.h"
-#include "../context/applicationcontext.h"
-#include "../context/renderingcontext.h"
-#include "../context/spatialcontext.h"
-#include "../context/uicontext.h"
-#include "../event/event.h"
-#include "../tools/tool.h"
 #include <QDateTime>
 #include <QWheelEvent>
+
+#include "../canvas/canvas.hpp"
+#include "../common/constants.hpp"
+#include "../common/renderitems.hpp"
+#include "../components/toolbar.hpp"
+#include "../context/applicationcontext.hpp"
+#include "../context/renderingcontext.hpp"
+#include "../context/spatialcontext.hpp"
+#include "../context/uicontext.hpp"
+#include "../event/event.hpp"
+#include "../tools/tool.hpp"
 
 Controller::Controller(QObject *parent) : QObject{parent} {
     m_context = ApplicationContext::instance(dynamic_cast<QWidget *>(parent));

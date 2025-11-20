@@ -16,18 +16,18 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "groupcommand.h"
+#include "groupcommand.hpp"
 
-#include "commandhistory.h"
-#include "selectcommand.h"
-#include "deselectcommand.h"
-#include "../context/applicationcontext.h"
-#include "../context/coordinatetransformer.h"
-#include "../context/selectioncontext.h"
-#include "../context/spatialcontext.h"
-#include "../data-structures/cachegrid.h"
-#include "../data-structures/quadtree.h"
-#include "../item/group.h"
+#include "commandhistory.hpp"
+#include "selectcommand.hpp"
+#include "deselectcommand.hpp"
+#include "../context/applicationcontext.hpp"
+#include "../context/coordinatetransformer.hpp"
+#include "../context/selectioncontext.hpp"
+#include "../context/spatialcontext.hpp"
+#include "../data-structures/cachegrid.hpp"
+#include "../data-structures/quadtree.hpp"
+#include "../item/group.hpp"
 
 GroupCommand::GroupCommand(QVector<std::shared_ptr<Item>> items) : ItemCommand{items} {
     m_group = std::make_shared<GroupItem>();
@@ -42,7 +42,7 @@ GroupCommand::~GroupCommand() {
 void GroupCommand::execute(ApplicationContext *context) {
     auto &quadtree{context->spatialContext().quadtree()};
     auto &selectedItems{context->selectionContext().selectedItems()};
-    
+
     for (const auto item : m_items) {
         quadtree.deleteItem(item, false);
     }

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Drawy
+Comment=Your handy, infinite, brainstorming tool
+Exec=drawy
+Icon=io.github.prayag2.Drawy
+Categories=Graphics

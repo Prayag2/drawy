@@ -16,16 +16,15 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "actionswidget.h"
-#include "../../context/applicationcontext.h"
-#include "../../context/uicontext.h"
-#include "../../keybindings/actionmanager.h"
-#include "../../iconmanager/iconmanager.h"
-#include <qboxlayout.h>
-#include <qpushbutton.h>
-#include <qwidget.h>
-
-#include "../property.h"
+#include "actionswidget.hpp"
+#include "../../context/applicationcontext.hpp"
+#include "../../context/uicontext.hpp"
+#include "../../keybindings/actionmanager.hpp"
+#include "../../iconmanager/iconmanager.hpp"
+#include "../property.hpp"
+#include <QBoxLayout>
+#include <QPushButton>
+#include <QWidget>
 
 ActionsWidget::ActionsWidget(QWidget *parent) : PropertyWidget{parent} {
     m_widget = new QWidget{parent};

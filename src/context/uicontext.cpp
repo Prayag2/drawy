@@ -1,48 +1,48 @@
 /*
-* Drawy - A simple brainstorming tool with an infinite canvas
-* Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Drawy - A simple brainstorming tool with an infinite canvas
+ * Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#include "uicontext.h"
+#include "uicontext.hpp"
 
-#include "../canvas/canvas.h"
-#include "../command/commandhistory.h"
-#include "../common/renderitems.h"
-#include "../components/actionbar.h"
-#include "../components/propertybar.h"
-#include "../components/toolbar.h"
-#include "../event/event.h"
-#include "../keybindings/actionmanager.h"
-#include "../keybindings/keybindmanager.h"
-#include "../properties/widgets/propertymanager.h"
-#include "../serializer/loader.h"
-#include "../serializer/serializer.h"
-#include "../tools/arrowtool.h"
-#include "../tools/ellipsetool.h"
-#include "../tools/erasertool.h"
-#include "../tools/freeformtool.h"
-#include "../tools/linetool.h"
-#include "../tools/movetool.h"
-#include "../tools/rectangletool.h"
-#include "../tools/selectiontool/selectiontool.h"
-#include "../tools/texttool.h"
-#include "applicationcontext.h"
-#include "renderingcontext.h"
-#include "selectioncontext.h"
-#include "spatialcontext.h"
+#include "../canvas/canvas.hpp"
+#include "../command/commandhistory.hpp"
+#include "../common/renderitems.hpp"
+#include "../components/actionbar.hpp"
+#include "../components/propertybar.hpp"
+#include "../components/toolbar.hpp"
+#include "../event/event.hpp"
+#include "../keybindings/actionmanager.hpp"
+#include "../keybindings/keybindmanager.hpp"
+#include "../properties/widgets/propertymanager.hpp"
+#include "../serializer/loader.hpp"
+#include "../serializer/serializer.hpp"
+#include "../tools/arrowtool.hpp"
+#include "../tools/ellipsetool.hpp"
+#include "../tools/erasertool.hpp"
+#include "../tools/freeformtool.hpp"
+#include "../tools/linetool.hpp"
+#include "../tools/movetool.hpp"
+#include "../tools/rectangletool.hpp"
+#include "../tools/selectiontool/selectiontool.hpp"
+#include "../tools/texttool.hpp"
+#include "applicationcontext.hpp"
+#include "renderingcontext.hpp"
+#include "selectioncontext.hpp"
+#include "spatialcontext.hpp"
 
 UIContext::UIContext(ApplicationContext *context)
     : QObject{context},

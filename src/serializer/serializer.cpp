@@ -1,36 +1,40 @@
 /*
-* Drawy - A simple brainstorming tool with an infinite canvas
-* Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Drawy - A simple brainstorming tool with an infinite canvas
+ * Copyright (C) 2025 - Prayag Jain <prayagjain2@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-#include "serializer.h"
+#include "serializer.hpp"
 
-#include "../context/applicationcontext.h"
-#include "../context/renderingcontext.h"
-#include "../context/spatialcontext.h"
-#include "../data-structures/quadtree.h"
-#include "../item/freeform.h"
-#include "../item/item.h"
-#include "../item/polygon.h"
-#include "../item/text.h"
 #include <QFileDialog>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QStandardPaths>
+#include <format>
 #include <memory>
+
+#include "../common/constants.hpp"
+#include "../common/utils/compression.hpp"
+#include "../context/applicationcontext.hpp"
+#include "../context/renderingcontext.hpp"
+#include "../context/spatialcontext.hpp"
+#include "../data-structures/quadtree.hpp"
+#include "../item/freeform.hpp"
+#include "../item/item.hpp"
+#include "../item/polygon.hpp"
+#include "../item/text.hpp"
 
 Serializer::Serializer() {
 }
@@ -118,14 +122,25 @@ void Serializer::saveToFile() {
     qDebug() << "Saving...";
 
     QDir homeDir{QDir::home()};
-    QString defaultFilePath = homeDir.filePath("Untitled.json");
+
+    auto text = std::format("Untitled.{}", Common::drawyFileExt);
+    QString defaultFilePath = homeDir.filePath(text.data());
+
+    text = std::format("Drawy (*.{})", Common::drawyFileExt);
     QString fileName{
-        QFileDialog::getSaveFileName(nullptr, "Save File", defaultFilePath, "JSON (*.json)")};
+        QFileDialog::getSaveFileName(nullptr, "Save File", defaultFilePath, text.data())};
+
+    auto data{doc.toJson(QJsonDocument::Compact)};
+    auto compressedData{Common::Utils::Compression::compressData(data)};
 
     QFile file{fileName};
     file.open(QIODevice::WriteOnly);
-    file.write(doc.toJson(QJsonDocument::Compact));
+    qint64 written = file.write(compressedData);
     file.close();
+
+    if (written != compressedData.size()) {
+        qWarning() << "Warning: not all bytes were written";
+    }
 
     qDebug() << "Saved to file: " << fileName;
 }

@@ -7,7 +7,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
@@ -27,7 +27,7 @@ set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 # Use globbing to recursively collect all source, header, and resource files from src/.
 file(GLOB_RECURSE SRC_FILES
     "${SRC_DIR}/*.cpp"
-    "${SRC_DIR}/*.h"
+    "${SRC_DIR}/*.hpp"
     "${SRC_DIR}/*.qrc"
     "${SRC_DIR}/*.qss"
 )
@@ -39,6 +39,9 @@ qt_add_executable(${PROJECT_NAME}
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
 )
+
+add_subdirectory(deps)
+
 qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::OpenGLWidgets)
@@ -66,5 +69,8 @@ install(TARGETS ${PROJECT_NAME}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-
-qt_finalize_executable(${PROJECT_NAME})
+if (UNIX AND NOT APPLE)
+  install(PROGRAMS deploy/linux/io.github.prayag2.Drawy.desktop.in DESTINATION ${CMAKE_INSTALL_FULL_DATADIR}/applications RENAME io.github.prayag2.Drawy.desktop)
+  install(FILES assets/logo.svg DESTINATION ${CMAKE_INSTALL_FULL_DATADIR}/icons/hicolor/scalable/apps RENAME io.github.prayag2.Drawy.svg)
+  install(FILES deploy/linux/io.github.prayag2.Drawy.metainfo.xml.in DESTINATION ${CMAKE_INSTALL_FULL_DATADIR}/metainfo/ RENAME io.github.prayag2.Drawy.metainfo.xml)
+endif()

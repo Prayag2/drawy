@@ -1,4 +1,4 @@
-#include "group.h"
+#include "group.hpp"
 #include <stdexcept>
 
 void GroupItem::draw(QPainter &painter, const QPointF &offset) {

@@ -16,15 +16,15 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ungroupcommand.h"
+#include "ungroupcommand.hpp"
 
-#include "../context/applicationcontext.h"
-#include "../context/coordinatetransformer.h"
-#include "../context/selectioncontext.h"
-#include "../context/spatialcontext.h"
-#include "../data-structures/cachegrid.h"
-#include "../data-structures/quadtree.h"
-#include "../item/group.h"
+#include "../context/applicationcontext.hpp"
+#include "../context/coordinatetransformer.hpp"
+#include "../context/selectioncontext.hpp"
+#include "../context/spatialcontext.hpp"
+#include "../data-structures/cachegrid.hpp"
+#include "../data-structures/quadtree.hpp"
+#include "../item/group.hpp"
 #include <memory>
 
 UngroupCommand::UngroupCommand(QVector<std::shared_ptr<Item>> items) : ItemCommand{items} {

@@ -57,9 +57,13 @@
             src = ./.;
             hooks = {
               nixfmt-rfc-style.enable = true;
-              mirrors-clang-format = {
-                entry = "${pkgs.clang-tools}/bin/clang-format";
+              clang-format = {
                 enable = true;
+                package = pkgs.clang-tools;
+                types_or = pkgs.lib.mkForce [
+                  "c"
+                  "c++"
+                ];
               };
             };
           };

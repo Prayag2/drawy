@@ -16,14 +16,14 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "selectcommand.h"
+#include "selectcommand.hpp"
 
-#include "../context/applicationcontext.h"
-#include "../context/coordinatetransformer.h"
-#include "../context/selectioncontext.h"
-#include "../context/spatialcontext.h"
-#include "../item/item.h"
-#include "../data-structures/cachegrid.h"
+#include "../context/applicationcontext.hpp"
+#include "../context/coordinatetransformer.hpp"
+#include "../context/selectioncontext.hpp"
+#include "../context/spatialcontext.hpp"
+#include "../item/item.hpp"
+#include "../data-structures/cachegrid.hpp"
 
 SelectCommand::SelectCommand(QVector<std::shared_ptr<Item>> items) : ItemCommand{items} {}
 
