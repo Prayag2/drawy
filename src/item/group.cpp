@@ -1,5 +1,6 @@
 #include "group.hpp"
 #include <stdexcept>
+#include <unordered_set>
 
 void GroupItem::draw(QPainter &painter, const QPointF &offset) {
     for (auto item : m_items) {
