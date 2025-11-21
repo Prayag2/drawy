@@ -3,6 +3,10 @@ message(STATUS "Fetching kanzi...")
 FetchContent_GetProperties(kanzi)
 FetchContent_MakeAvailable(kanzi)
 
+if(WIN32)
+    set_target_properties(libkanzi PROPERTIES COMPILE_OPTIONS "")
+endif()
+
 message(STATUS "kanzi_SOURCE_DIR=${kanzi_SOURCE_DIR}")
 
 add_subdirectory(${kanzi_SOURCE_DIR}/src ${kanzi_BINARY_DIR})

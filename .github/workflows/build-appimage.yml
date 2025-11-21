@@ -27,8 +27,8 @@ jobs:
           sudo apt install -y build-essential cmake git wget patchelf fuse curl software-properties-common \
             libxkbcommon0 libxkbcommon-x11-0 libxkbcommon-dev libxcb-keysyms1 libxcb-keysyms1-dev \
             libxcb-icccm4 libxcb-icccm4-dev libgl1-mesa-dev libxcb-cursor0 libxcb-cursor-dev \
-            libxcb-shape0 libxcb-shape0-dev gcc-15 g++-15
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-15 60 --slave /usr/bin/g++ g++ /usr/bin/g++-15
+            libxcb-shape0 libxcb-shape0-dev gcc-13 g++-13
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 60 --slave /usr/bin/g++ g++ /usr/bin/g++-13
 
       - name: Configure
         run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=$Qt6_DIR
