@@ -34,7 +34,7 @@ jobs:
         run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=$Qt6_DIR
 
       - name: Build
-        run: cmake --build build --config Release
+        run: cmake --build build --config Release -- -j$(nproc)
 
       - name: Prepare AppImage tools
         run: |
