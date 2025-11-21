@@ -20,6 +20,10 @@ cleanup:
   - '*.a'
   - '*.la'
 
+build-options:
+  build-args:
+    - --share=network
+
 modules:
   - name: drawy
     config-opts:
