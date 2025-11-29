@@ -41,7 +41,6 @@ public:
     void setBoundingBoxPadding(int padding);
     int boundingBoxPadding() const;
 
-
     virtual void setProperty(const Property::Type propertyType, Property newObj);
     virtual const Property property(const Property::Type propertyType) const;
     virtual const QVector<Property> properties() const;

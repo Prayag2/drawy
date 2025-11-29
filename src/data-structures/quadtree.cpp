@@ -73,7 +73,7 @@ bool QuadTree::insert(std::shared_ptr<Item> item, bool updateOrder) {
 
     if (m_items.size() < m_capacity) {
         m_items.push_back(item);
-        
+
         if (updateOrder)
             m_orderedList->insert(item);
 
@@ -132,7 +132,7 @@ void QuadTree::clear() {
     }
 }
 
-void QuadTree::reorder(QVector<ItemPtr>& items) const {
+void QuadTree::reorder(QVector<ItemPtr> &items) const {
     std::sort(items.begin(), items.end(), [&](auto &firstItem, auto &secondItem) {
         return m_orderedList->zIndex(firstItem) < m_orderedList->zIndex(secondItem);
     });

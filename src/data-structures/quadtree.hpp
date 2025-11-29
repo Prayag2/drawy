@@ -64,7 +64,7 @@ public:
     void updateItem(ItemPtr item, const QRectF &oldBoundingBox);
     void deleteItems(const QRectF &boundingBox);
 
-    void reorder(QVector<ItemPtr>& items) const;
+    void reorder(QVector<ItemPtr> &items) const;
 
     QVector<ItemPtr> getAllItems() const;
     void clear();

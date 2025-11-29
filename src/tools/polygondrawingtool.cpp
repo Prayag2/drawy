@@ -19,10 +19,11 @@
 #include "polygondrawingtool.hpp"
 
 #include <memory>
-#include "../command/selectcommand.hpp"
+
 #include "../canvas/canvas.hpp"
 #include "../command/commandhistory.hpp"
 #include "../command/insertitemcommand.hpp"
+#include "../command/selectcommand.hpp"
 #include "../common/renderitems.hpp"
 #include "../context/applicationcontext.hpp"
 #include "../context/coordinatetransformer.hpp"

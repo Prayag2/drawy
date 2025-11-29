@@ -17,10 +17,11 @@
  */
 
 #include "selectiontoolselectstate.hpp"
-#include "../../command/selectcommand.hpp"
-#include "../../command/deselectcommand.hpp"
-#include "../../command/commandhistory.hpp"
+
 #include "../../canvas/canvas.hpp"
+#include "../../command/commandhistory.hpp"
+#include "../../command/deselectcommand.hpp"
+#include "../../command/selectcommand.hpp"
 #include "../../components/propertybar.hpp"
 #include "../../context/applicationcontext.hpp"
 #include "../../context/coordinatetransformer.hpp"
@@ -63,12 +64,15 @@ bool SelectionToolSelectState::mousePressed(ApplicationContext *context) {
         if (intersectingItems.empty()) {
             m_isActive = true;
         } else {
-            auto& item{intersectingItems.back()};
-            if ((event.modifiers() & Qt::ShiftModifier) && selectedItems.find(item) != selectedItems.end()) {
+            auto &item{intersectingItems.back()};
+            if ((event.modifiers() & Qt::ShiftModifier) &&
+                selectedItems.find(item) != selectedItems.end()) {
                 // deselect the item if selected
-                commandHistory.insert(std::make_shared<DeselectCommand>(QVector<std::shared_ptr<Item>>{item}));
+                commandHistory.insert(
+                    std::make_shared<DeselectCommand>(QVector<std::shared_ptr<Item>>{item}));
             } else {
-                commandHistory.insert(std::make_shared<SelectCommand>(QVector<std::shared_ptr<Item>>{item}));
+                commandHistory.insert(
+                    std::make_shared<SelectCommand>(QVector<std::shared_ptr<Item>>{item}));
             }
             m_isActive = false;
             lockState = false;

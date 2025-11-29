@@ -24,7 +24,7 @@ class Property {
 public:
     Property();
 
-    enum Type { StrokeWidth, StrokeColor, Opacity, FontSize, EraserSize, Actions, Null};
+    enum Type { StrokeWidth, StrokeColor, Opacity, FontSize, EraserSize, Actions, Null };
 
     template <typename T>
     Property(T value, Type type) {

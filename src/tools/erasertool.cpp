@@ -20,6 +20,7 @@
 
 #include <QDebug>
 #include <QPainter>
+#include <ranges>
 
 #include "../canvas/canvas.hpp"
 #include "../command/commandhistory.hpp"
@@ -38,6 +39,10 @@
 #include "../item/item.hpp"
 #include "../properties/widgets/propertymanager.hpp"
 
+namespace {
+static constexpr std::array<Qt::MouseButton, 2> BUTTONS = {Qt::LeftButton, Qt::RightButton};
+}
+
 EraserTool::EraserTool() {
     m_cursor = QCursor(Qt::CrossCursor);
 
@@ -47,7 +52,7 @@ EraserTool::EraserTool() {
 void EraserTool::mousePressed(ApplicationContext *context) {
     Event &event{context->uiContext().event()};
 
-    if (event.button() == Qt::LeftButton) {
+    if (std::ranges::find(BUTTONS, event.button()) != BUTTONS.end()) {
         m_isErasing = true;
     }
 };
@@ -112,7 +117,7 @@ void EraserTool::mouseMoved(ApplicationContext *context) {
 void EraserTool::mouseReleased(ApplicationContext *context) {
     UIContext &uiContext{context->uiContext()};
 
-    if (uiContext.event().button() == Qt::LeftButton) {
+    if (std::ranges::find(BUTTONS, uiContext.event().button())) {
         SpatialContext &spatialContext{context->spatialContext()};
         CoordinateTransformer &transformer{spatialContext.coordinateTransformer()};
         RenderingContext &renderingContext{context->renderingContext()};

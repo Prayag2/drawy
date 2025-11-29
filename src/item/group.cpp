@@ -1,9 +1,11 @@
 #include "group.hpp"
+
 #include <stdexcept>
 
 void GroupItem::draw(QPainter &painter, const QPointF &offset) {
     for (auto item : m_items) {
-        item->draw(painter, offset); }
+        item->draw(painter, offset);
+    }
 }
 
 void GroupItem::erase(QPainter &painter, const QPointF &offset) const {
@@ -18,7 +20,7 @@ void GroupItem::translate(const QPointF &amount) {
     }
 }
 
-void GroupItem::group(const QVector<std::shared_ptr<Item>>& items) {
+void GroupItem::group(const QVector<std::shared_ptr<Item>> &items) {
     m_items = items;
 }
 
@@ -41,7 +43,6 @@ bool GroupItem::intersects(const QLineF &line) {
 
     return false;
 };
-
 
 QVector<std::shared_ptr<Item>> GroupItem::unGroup() {
     return m_items;
@@ -82,7 +83,7 @@ const Property GroupItem::property(const Property::Type propertyType) const {
             } else {
                 property = item->property(propertyType);
             }
-        } catch (const std::logic_error& e) {
+        } catch (const std::logic_error &e) {
             // ignore
         }
     }

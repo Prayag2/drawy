@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
 
     BoardLayout *layout{new BoardLayout(this)};
     Controller *controller{new Controller(this)};
+    controller->initialize();
     ApplicationContext *context{ApplicationContext::instance()};
 
     RenderingContext &renderingContext{context->renderingContext()};

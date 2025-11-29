@@ -73,8 +73,10 @@ void Item::setProperty(const Property::Type propertyType, Property newObj) {
     updateAfterProperty();
 }
 
-void Item::updateAfterProperty() {}
-void Item::erase(QPainter &painter, const QPointF &offset) const {}
+void Item::updateAfterProperty() {
+}
+void Item::erase(QPainter &painter, const QPointF &offset) const {
+}
 
 int Item::boundingBoxPadding() const {
     return m_boundingBoxPadding;
