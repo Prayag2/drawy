@@ -1,5 +1,10 @@
 > [!NOTE]
-> Drawy Now is available on **Archlinux** AUR
+> Drawy has moved to KDE Invent. This repository is kept only to track and resolve existing issues. Please open all new issues and pull requests on KDE Invent instead.
+> 
+> https://invent.kde.org/prayag/drawy
+
+> [!NOTE]
+> **Drawy** is now available on Archlinux AUR
 
   
 <p align="center">
