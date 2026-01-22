@@ -1,7 +1,5 @@
 > [!NOTE]
-> Drawy has moved to KDE Invent. This repository is kept only to track and resolve existing issues. Please open all new issues and pull requests on KDE Invent instead.
->   
-> https://invent.kde.org/prayag/drawy
+> Drawy Now is available on **Archlinux** AUR
 
   
 <p align="center">
@@ -28,6 +26,24 @@ Drawy is a work-in-progress infinite whiteboard tool written in Qt/C++, which ai
 <a href="https://github.com/Prayag2/drawy/releases/download/1.0.0-alpha/drawy-windows-x86_64.zip">
 <img alt="Static Badge" src="https://img.shields.io/badge/Download-Windows-007CF7?style=for-the-badge&labelColor=%23202025">
 </a>
+
+## On arch linux
+```fish
+# using yay
+yay -S drawy
+```
+
+```fish
+# using paru
+paru -S drawy
+```
+
+```fish
+# or manually
+git clone https://aur.archlinux.org/drawy.git
+cd drawy
+makepkg -si
+```
 
 ## Compiling from Source
 - Install `cmake` and `g++`
